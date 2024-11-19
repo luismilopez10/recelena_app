@@ -260,7 +260,7 @@ class HomeScreen extends StatelessWidget {
                 constraints: const BoxConstraints(maxWidth: 40.0),
                 child: const Center(
                   child: Text(
-                    'Recelena Apps\n 1.0.0 (1)',
+                    'Recelena Apps\n 1.0.0+1',
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -429,17 +429,21 @@ class _InfoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const Color color = Colors.black87;
+
     return Row(
       children: [
         Icon(
           icon,
           size: 17.0,
+          color: color,
         ),
         const SizedBox(width: 4.0),
         Text(
           text,
           style: const TextStyle(
             fontSize: 11.0,
+            color: color,
           ),
         ),
       ],
