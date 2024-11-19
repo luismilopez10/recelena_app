@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
   final List<Recipe> recipeList = [
     Recipe(
       recipeId: '1',
-      title: 'Pollo 🍗',
+      title: 'Pollo al curri 🍗',
       imageUrl:
           'https://i.ytimg.com/vi/lS1YGtz2Mss/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCtoLur6A8VGqRkAhv7pyEpTiQh8g',
       rations: 5,
@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
     ),
     Recipe(
       recipeId: '2',
-      title: 'Spaghetti 🍝',
+      title: 'Spaghettis a la bolognesa 🍝',
       imageUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlctWZdMpNF5eREeLWS1UhZAMQ-oWoS-5nQw&s',
       rations: 4,
@@ -56,7 +56,8 @@ class HomeScreen extends StatelessWidget {
     ),
     Recipe(
       recipeId: '3',
-      title: 'Crema de champiñones 🍄‍🟫 con pollo 🍲',
+      title:
+          'Crema de champiñones 🍄‍🟫 con pollo 🍲 y queso y otras cosas todas ricas que cuando se comen saben delicioso',
       imageUrl:
           'https://www.vvsupremo.com/wp-content/uploads/2016/07/Screen-Shot-2016-07-11-at-8.05.24-AM.jpg',
       rations: 2,
@@ -251,6 +252,24 @@ class HomeScreen extends StatelessWidget {
                 childCount: recipeList.length,
               ),
             ),
+
+            //* App Watermark
+            SliverToBoxAdapter(
+              child: Container(
+                height: 80.0,
+                constraints: const BoxConstraints(maxWidth: 40.0),
+                child: const Center(
+                  child: Text(
+                    'Recelena Apps\n 1.0.0 (1)',
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Colors.black54,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -316,18 +335,18 @@ class _RecipeCard extends StatelessWidget {
                           color: Colors.black54,
                         ),
                       ),
-                      const SizedBox(height: 4.0),
+                      const SizedBox(height: 6.0),
                       //* Recipe Info
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           //* Recipe Preparation Time
                           _InfoItem(
-                              icon: Icons.timer,
+                              icon: Icons.timer_outlined,
                               text: '${recipe.preparationTime} minutos'),
                           //* Recipe Rations
                           _InfoItem(
-                              icon: Icons.people,
+                              icon: Icons.people_outline,
                               text: '${recipe.rations} platos'),
                         ],
                       ),
@@ -337,7 +356,7 @@ class _RecipeCard extends StatelessWidget {
               ),
             ),
 
-            //* Recipe Image
+            //* Recipe Image and Bookmark
             Align(
               alignment: Alignment.centerRight,
               child: SizedBox(
@@ -355,19 +374,40 @@ class _RecipeCard extends StatelessWidget {
                     ),
                     Positioned.fill(
                       child: Container(
-                        color: Colors.black.withOpacity(0.05),
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.black26,
+                              Colors.transparent,
+                              Colors.transparent,
+                              Colors.black45,
+                            ],
+                            stops: [
+                              0.0,
+                              0.3,
+                              0.65,
+                              1.0,
+                            ],
+                          ),
+                        ),
                         //* Bookmark recipe / save recipe
-                        // child: const Padding(
-                        //   padding: EdgeInsets.all(6.0),
-                        //   child: Align(
-                        //     alignment: Alignment.bottomRight,
-                        //     child: Icon(
-                        //       Icons.bookmark_border,
-                        //       color: Colors.white,
-                        //       size: 28.0,
-                        //     ),
-                        //   ),
-                        // ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: GestureDetector(
+                              onTap: () {}, //TODO: Add save logic
+                              child: const Icon(
+                                Icons.bookmark,
+                                // Icons.bookmark_border_rounded,
+                                color: Colors.white,
+                                size: 28.0,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ],

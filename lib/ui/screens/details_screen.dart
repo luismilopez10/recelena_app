@@ -48,7 +48,7 @@ class _CustomAppBar extends StatelessWidget {
         titlePadding: EdgeInsets.zero,
         title: Container(
           alignment: Alignment.bottomCenter,
-          padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
+          padding: const EdgeInsets.only(left: 40.0, right: 40.0, bottom: 10.0),
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
@@ -58,8 +58,8 @@ class _CustomAppBar extends StatelessWidget {
               ],
               stops: [
                 0.05,
-                0.84,
-                1.0,
+                0.8,
+                0.9,
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
