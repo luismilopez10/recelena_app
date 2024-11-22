@@ -1,188 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'package:recelena_app/domain/model/recipe/recipe.dart';
+import 'package:recelena_app/domain/models/recipe/recipe.dart';
+import 'package:recelena_app/providers/new_recipe_form_provider.dart';
+import 'package:recelena_app/providers/recipe_provider.dart';
 import 'package:recelena_app/settings/app_assets.dart';
 import 'package:recelena_app/settings/app_colors.dart';
 import 'package:recelena_app/ui/screens/details_screen.dart';
+import 'package:recelena_app/ui/screens/new_recipe_form_screen.dart';
 import 'package:recelena_app/ui/widgets/custom_image_container.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String routerName = 'Home';
 
-  HomeScreen({super.key});
-
-  final List<Recipe> recipeList = [
-    Recipe(
-      recipeId: '1',
-      title: 'Pollo al curri 🍗',
-      imageUrl:
-          'https://i.ytimg.com/vi/lS1YGtz2Mss/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCtoLur6A8VGqRkAhv7pyEpTiQh8g',
-      rations: 5,
-      preparationTime: 45,
-      isStorable: true,
-      storage: 'Refrigeration',
-      storageTemperature: 4,
-      notes: '',
-      ingredients: [
-        Ingredient(
-          name: 'Pollo',
-          quantity: 1,
-          quantityUnit: 'unidad',
-          observations: '',
-        ),
-      ],
-      preparation: 'Se toma el alimento principal y se cocina hasta que',
-    ),
-    Recipe(
-      recipeId: '2',
-      title: 'Spaghettis a la bolognesa 🍝',
-      imageUrl:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlctWZdMpNF5eREeLWS1UhZAMQ-oWoS-5nQw&s',
-      rations: 4,
-      preparationTime: 50,
-      isStorable: true,
-      storage: 'Refrigeration',
-      storageTemperature: 4,
-      notes: '',
-      ingredients: [
-        Ingredient(
-          name: 'Spaghetti',
-          quantity: 1,
-          quantityUnit: 'unidad',
-          observations: '',
-        ),
-      ],
-      preparation: 'Se toma el alimento principal y se cocina hasta que',
-    ),
-    Recipe(
-      recipeId: '3',
-      title:
-          'Crema de champiñones 🍄‍🟫 con pollo 🍲 y queso y otras cosas todas ricas que cuando se comen saben delicioso',
-      imageUrl:
-          'https://www.vvsupremo.com/wp-content/uploads/2016/07/Screen-Shot-2016-07-11-at-8.05.24-AM.jpg',
-      rations: 2,
-      preparationTime: 20,
-      isStorable: true,
-      storage: 'Refrigeration',
-      storageTemperature: 4,
-      notes: '',
-      ingredients: [
-        Ingredient(
-          name: 'Pollo',
-          quantity: 1,
-          quantityUnit: 'unidad',
-          observations: '',
-        ),
-      ],
-      preparation: 'Se toma el alimento principal y se cocina hasta que',
-    ),
-    Recipe(
-      recipeId: '4',
-      title: 'Salmón al ajillo 🐟',
-      imageUrl: 'https://i.ytimg.com/vi/Xc7-mEE3zAE/maxresdefault.jpg',
-      rations: 4,
-      preparationTime: 90,
-      isStorable: true,
-      storage: 'Refrigeration',
-      storageTemperature: 4,
-      notes: '',
-      ingredients: [
-        Ingredient(
-          name: 'Salmón',
-          quantity: 1,
-          quantityUnit: 'unidad',
-          observations: '',
-        ),
-      ],
-      preparation: 'Se toma el alimento principal y se cocina hasta que',
-    ),
-    Recipe(
-      recipeId: '1',
-      title: 'Pollo 🍗',
-      imageUrl:
-          'https://i.ytimg.com/vi/lS1YGtz2Mss/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCtoLur6A8VGqRkAhv7pyEpTiQh8g',
-      rations: 5,
-      preparationTime: 45,
-      isStorable: true,
-      storage: 'Refrigeration',
-      storageTemperature: 4,
-      notes: '',
-      ingredients: [
-        Ingredient(
-          name: 'Pollo',
-          quantity: 1,
-          quantityUnit: 'unidad',
-          observations: '',
-        ),
-      ],
-      preparation: 'Se toma el alimento principal y se cocina hasta que',
-    ),
-    Recipe(
-      recipeId: '2',
-      title: 'Spaghetti 🍝',
-      imageUrl:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlctWZdMpNF5eREeLWS1UhZAMQ-oWoS-5nQw&s',
-      rations: 4,
-      preparationTime: 50,
-      isStorable: true,
-      storage: 'Refrigeration',
-      storageTemperature: 4,
-      notes: '',
-      ingredients: [
-        Ingredient(
-          name: 'Spaghetti',
-          quantity: 1,
-          quantityUnit: 'unidad',
-          observations: '',
-        ),
-      ],
-      preparation: 'Se toma el alimento principal y se cocina hasta que',
-    ),
-    Recipe(
-      recipeId: '3',
-      title: 'Crema de champiñones 🍄‍🟫 con pollo 🍲',
-      imageUrl:
-          'https://www.vvsupremo.com/wp-content/uploads/2016/07/Screen-Shot-2016-07-11-at-8.05.24-AM.jpg',
-      rations: 2,
-      preparationTime: 20,
-      isStorable: true,
-      storage: 'Refrigeration',
-      storageTemperature: 4,
-      notes: '',
-      ingredients: [
-        Ingredient(
-          name: 'Pollo',
-          quantity: 1,
-          quantityUnit: 'unidad',
-          observations: '',
-        ),
-      ],
-      preparation: 'Se toma el alimento principal y se cocina hasta que',
-    ),
-    Recipe(
-      recipeId: '4',
-      title: 'Salmón al ajillo 🐟',
-      imageUrl: 'https://i.ytimg.com/vi/Xc7-mEE3zAE/maxresdefault.jpg',
-      rations: 4,
-      preparationTime: 90,
-      isStorable: true,
-      storage: 'Refrigeration',
-      storageTemperature: 4,
-      notes: '',
-      ingredients: [
-        Ingredient(
-          name: 'Salmón',
-          quantity: 1,
-          quantityUnit: 'unidad',
-          observations: '',
-        ),
-      ],
-      preparation: 'Se toma el alimento principal y se cocina hasta que',
-    ),
-  ];
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final RecipeProvider recipeProvider = Provider.of<RecipeProvider>(context);
+    var recipeList = recipeProvider.recipeList;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.whiteBackgroundColor,
@@ -194,7 +31,7 @@ class HomeScreen extends StatelessWidget {
         leading: const Padding(
           padding: EdgeInsets.only(left: 12.0, top: 12.0, bottom: 12.0),
           child: CircleAvatar(
-            maxRadius: 120,
+            maxRadius: 120.0,
             backgroundImage: NetworkImage(
                 'https://res.cloudinary.com/dqnudwull/image/upload/v1683774725/Luis_egrioh.jpg'),
           ),
@@ -208,7 +45,7 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {}, //TODO: Add search logic
             icon: const Icon(Icons.search),
           ),
         ],
@@ -259,8 +96,20 @@ class HomeScreen extends StatelessWidget {
                 height: 80.0,
                 constraints: const BoxConstraints(maxWidth: 40.0),
                 child: const Center(
-                  child: Text(
-                    'Recelena Apps\n 1.0.0+1',
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Recelena App',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '\n1.0.0+1',
+                        ),
+                      ],
+                    ),
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -275,7 +124,10 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          // Navigator.of(context).push(MaterialPageRoute(
+          //     builder: (context) => const NewRecipeFormScreen()));
+        },
       ),
     );
   }
@@ -288,9 +140,9 @@ class _RecipeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.sizeOf(context).width - 40;
-    final recipeImageWidth = screenWidth * 0.35;
-    final recipeInfoWidth = screenWidth - recipeImageWidth;
+    final availableScreenWidth = MediaQuery.sizeOf(context).width - 32.0;
+    final recipeImageWidth = availableScreenWidth * 0.35;
+    final recipeInfoWidth = availableScreenWidth - recipeImageWidth;
 
     return SizedBox(
       height: 130.0,
@@ -379,34 +231,100 @@ class _RecipeCard extends StatelessWidget {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                              Colors.black26,
+                              Colors.black38,
                               Colors.transparent,
                               Colors.transparent,
                               Colors.black45,
                             ],
                             stops: [
-                              0.0,
+                              0.05,
                               0.3,
                               0.65,
                               1.0,
                             ],
                           ),
                         ),
-                        //* Bookmark recipe / save recipe
-                        child: Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: Align(
-                            alignment: Alignment.bottomRight,
-                            child: GestureDetector(
-                              onTap: () {}, //TODO: Add save logic
-                              child: const Icon(
-                                Icons.bookmark,
-                                // Icons.bookmark_border_rounded,
-                                color: Colors.white,
-                                size: 28.0,
+                        //* Recipe Options Menu and Bookmark/Save Recipe
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            //* Recipe Options Menu
+                            PopupMenuButton<String>(
+                              icon: const Icon(Icons.more_horiz),
+                              menuPadding: EdgeInsets.zero,
+                              position: PopupMenuPosition.under,
+                              offset: const Offset(-30.0, 0.0),
+                              // constraints: BoxConstraints(
+                              //   minWidth: 0.0,
+                              //   minHeight: 0.0,
+                              // ),
+
+                              color: AppColors.whiteBackgroundColor,
+                              iconColor: Colors.white,
+                              iconSize: 30.0,
+                              popUpAnimationStyle:
+                                  AnimationStyle(curve: Curves.easeInCubic),
+                              onSelected: (value) {
+                                if (value == 'editar') {
+                                  //TODO: Navigate to recipe form
+                                } else if (value == 'borrar') {
+                                  //TODO: Show alert
+                                }
+                              },
+                              itemBuilder: (BuildContext context) =>
+                                  <PopupMenuEntry<String>>[
+                                const PopupMenuItem<String>(
+                                  value: 'editar',
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.edit_outlined, size: 16.0),
+                                      SizedBox(width: 6.0),
+                                      Text(
+                                        'Editar',
+                                        style: TextStyle(
+                                          fontSize: 13.0,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const PopupMenuItem<String>(
+                                  value: 'borrar',
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.delete_forever_outlined,
+                                        size: 16.0,
+                                        color: AppColors.warningColor,
+                                      ),
+                                      SizedBox(width: 6.0),
+                                      Text(
+                                        'Borrar',
+                                        style: TextStyle(
+                                          fontSize: 13.0,
+                                          color: AppColors.warningColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            //* Bookmark/Save Recipe
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () {}, //TODO: Add save logic
+                                child: const Icon(
+                                  Icons.bookmark,
+                                  // Icons.bookmark_border_rounded,
+                                  color: Colors.white,
+                                  size: 28.0,
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                     ),

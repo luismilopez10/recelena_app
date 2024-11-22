@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'package:recelena_app/providers/new_recipe_form_provider.dart';
+import 'package:recelena_app/providers/recipe_provider.dart';
 import 'package:recelena_app/settings/app_colors.dart';
 import 'package:recelena_app/ui/screens/home_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (_) => RecipeProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => NewRecipeFormProvider(),
+      ),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +33,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }
